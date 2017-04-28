@@ -63,14 +63,97 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports) {
 
-console.log("Hello From the Server!");
+module.exports = require("body-parser");
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+module.exports = require("cookie-parser");
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+module.exports = require("express");
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("morgan");
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(__dirname) {//IMPORTS//
+var express = __webpack_require__(2);
+var path = __webpack_require__(4);
+var logger = __webpack_require__(3);
+var cookieParser = __webpack_require__(1);
+var bodyParser = __webpack_require__(0);
+
+var app = express();
+
+
+//=====================================//
+//============MIDDLEWARE===============//
+//=====================================//
+
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+//=====================================//
+//==============ROUTES=================//
+//=====================================//
+
+//Serve Main Page
+app.get('/', function(req, res, next){
+	res.send('Hello From The Server!');
+});
+
+
+//=====================================//
+//==============ERROR==================//
+//=====================================//
+
+//Run Server Error
+app.use(function(err, req, res, next) {
+    console.log('Error!');
+});
+
+
+//=====================================//
+//===========LISTENER==================//
+//=====================================//
+
+//Listen on Port
+app.listen(3000, function () {
+    console.log('Server running on localhost:3000');
+});
+
+module.exports = app;
+/* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ })
 /******/ ]);

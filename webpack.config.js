@@ -1,17 +1,22 @@
 var webpack = require('webpack');
 var path = require('path');
 var fs = require('fs');
+var nodeExternals = require('webpack-node-externals');	//To ignore externals
 
 //Common
 var common = {
-    module: {
-        loaders: [ /* common loaders */ ]
-    },
-    plugins: [ /* common plugins */ ],
-    resolve: {
-        extensions: ['.js', '.jsx'] // common extensions
-    }
-    // other plugins, postcss config etc. common for frontend and backend
+  module: {
+  	loaders: [ /* common loaders */ ]
+  },
+  plugins: [ /* common plugins */ ],
+  resolve: {
+      extensions: ['.js', '.jsx'] // common extensions
+  },
+  externals: [
+		// specify node_modules not to be bundled
+		nodeExternals()
+	],
+  // other plugins, postcss config etc. common for frontend and backend
 };
 
 
@@ -30,7 +35,7 @@ var frontend = {
 		loaders: [
 			{
 				test: /\.jsx?/,
-				include: APP_DIR,
+				include: FE_APP_DIR,
 				loader: 'babel-loader'
 			},
 		/* Multiple Loaders */
@@ -43,28 +48,15 @@ var frontend = {
 //Back End
 var BE_APP_DIR = path.resolve(__dirname, 'src/server/app');
 
-var nodeModules = {};
-fs.readdirSync('node_modules')
-  .filter(function(x) {
-    return ['.bin'].indexOf(x) === -1;
-  })
-  .forEach(function(mod) {
-    nodeModules[mod] = 'commonjs ' + mod;
-  });
-
 var backend = {
 	entry: {
 		app: BE_APP_DIR + '/app.js', /*Single Entry Point*/	
 	},
+	target: 'node',
 	output:{
 		path: path.join(__dirname, "src/server/build"),
 		filename: "[name].backend.js",
 	},
-	target: 'node',
-	externals: {
-		// specify node_modules to be not bundled
-		nodeModules
-	}
 }
 
 
