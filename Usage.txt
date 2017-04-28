@@ -1,0 +1,28 @@
+Usage Guide
+-----------
+Compilation: 
+	- Run ./node_modules/.bin/webpack --watch
+Modifying Server and Client files are watched by webpack and automatically generated when modified.
+
+
+Running Server:
+	- Run node command on the build file PATH/src/server/build/app.backend.js
+app.backend.js is the webpack compiled server entry point. (Configuration mirrors that of grunt).
+
+
+Rendering Front End Builds:
+	- Render builds in HTML via <script/> for files PATH/src/client/build/.*
+Webpack automatically rebuilds html files when jsx files are changed. (Note: Babel loader transcribes ES8, JSX to browser readable content).
+
+
+Adding new Front End Builds:
+	- New pages should be added to PATH/webpack.config.js under the frontend config.
+	- Add as an entry point in the array list with a unique key
+Each entry point defines a new webpage that utilizes new React Components 
+
+
+Adding Loaders and Plugins:
+	- Plugins and loaders common to both front end and backend should be appended to the array list inside the common config.
+Ensure to install and save to package.json any loaders used in webpack. 
+
+
