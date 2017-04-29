@@ -139,7 +139,12 @@ app.get('/', function(req, res, next){
 
 //Run Server Error
 app.use(function(err, req, res, next) {
-    console.log('Error!');
+  //Error Handler Here
+  next();
+});
+
+app.get('*', function(req, res, next){
+	res.status(404).end();
 });
 
 

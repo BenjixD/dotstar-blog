@@ -6,7 +6,7 @@ Modifying Server and Client files are watched by webpack and automatically gener
 
 
 Running Server:
-	- Run node command on the build file PATH/src/server/build/app.backend.js
+	- Run nodemon command on the build file PATH/src/server/build/app.backend.js
 app.backend.js is the webpack compiled server entry point. (Configuration mirrors that of grunt).
 
 
