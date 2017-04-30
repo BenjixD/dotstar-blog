@@ -36,7 +36,10 @@ var frontend = {
 			{
 				test: /\.jsx?/,
 				include: FE_APP_DIR,
-				loader: 'babel-loader'
+				loader: 'babel-loader',
+				query: {
+        	"presets": ["react", "es2017"]
+      	}
 			},
 		/* Multiple Loaders */
 		]

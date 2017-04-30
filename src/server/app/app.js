@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var app = express();
+var client = path.resolve('..','..','client');	//Path to client folder 
 
 
 //=====================================//
@@ -18,7 +19,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(client));	//Express to Serve Public Content
 
 
 //=====================================//
@@ -27,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Serve Main Page
 app.get('/', function(req, res, next){
-	res.send('Hello From The Server!');
+	res.sendFile(path.join(client, 'index.html'));
 });
 
 

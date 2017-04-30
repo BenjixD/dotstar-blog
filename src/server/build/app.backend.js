@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -97,10 +97,11 @@ module.exports = require("morgan");
 module.exports = require("path");
 
 /***/ }),
-/* 5 */
+/* 5 */,
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(__dirname) {//IMPORTS//
+//IMPORTS//
 var express = __webpack_require__(2);
 var path = __webpack_require__(4);
 var logger = __webpack_require__(3);
@@ -108,6 +109,7 @@ var cookieParser = __webpack_require__(1);
 var bodyParser = __webpack_require__(0);
 
 var app = express();
+var client = path.resolve('..','..','client');	//Path to client folder 
 
 
 //=====================================//
@@ -120,7 +122,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(client));	//Express to Serve Public Content
 
 
 //=====================================//
@@ -129,7 +131,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Serve Main Page
 app.get('/', function(req, res, next){
-	res.send('Hello From The Server!');
+	res.sendFile(path.join(client, 'index.html'));
 });
 
 
@@ -158,7 +160,6 @@ app.listen(3000, function () {
 });
 
 module.exports = app;
-/* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ })
 /******/ ]);
