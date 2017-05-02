@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -97,8 +97,7 @@ module.exports = require("morgan");
 module.exports = require("path");
 
 /***/ }),
-/* 5 */,
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //IMPORTS//
@@ -109,7 +108,7 @@ var cookieParser = __webpack_require__(1);
 var bodyParser = __webpack_require__(0);
 
 var app = express();
-var client = path.resolve('..','..','client');	//Path to client folder 
+var client = path.resolve('..','..','client','public');	//Path to client public folder 
 
 
 //=====================================//
@@ -131,7 +130,7 @@ app.use(express.static(client));	//Express to Serve Public Content
 
 //Serve Main Page
 app.get('/', function(req, res, next){
-	res.sendFile(path.join(client, 'index.html'));
+	res.sendFile(path.join(client,'index.html'));
 });
 
 

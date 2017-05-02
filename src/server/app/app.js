@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var app = express();
-var client = path.resolve('..','..','client');	//Path to client folder 
+var client = path.resolve('..','..','client','public');	//Path to client public folder 
 
 
 //=====================================//
@@ -28,7 +28,7 @@ app.use(express.static(client));	//Express to Serve Public Content
 
 //Serve Main Page
 app.get('/', function(req, res, next){
-	res.sendFile(path.join(client, 'index.html'));
+	res.sendFile(path.join(client,'index.html'));
 });
 
 

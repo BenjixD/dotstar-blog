@@ -13,8 +13,7 @@ var common = {
       extensions: ['.js', '.jsx'] // common extensions
   },
   externals: [
-		// specify node_modules not to be bundled
-		nodeExternals()
+		//Ignore any common modules	
 	],
   // other plugins, postcss config etc. common for frontend and backend
 };
@@ -28,7 +27,7 @@ var frontend = {
 		/* Multiple Entry Points */
 	},
 	output:{
-		path: path.join(__dirname, "src/client/build"),
+		path: path.join(__dirname, "src/client/public/build"),
 		filename: "[name].bundle.js",
 	},
 	module: {
@@ -60,6 +59,10 @@ var backend = {
 		path: path.join(__dirname, "src/server/build"),
 		filename: "[name].backend.js",
 	},
+	externals: [
+	// specify node_modules not to be bundled
+		nodeExternals()
+	]
 }
 
 
