@@ -10,7 +10,7 @@ var common = {
   },
   plugins: [ /* common plugins */ ],
   resolve: {
-      extensions: ['.js', '.jsx'] // common extensions
+      extensions: ['.js', '.jsx', '.less'] // common extensions
   },
   externals: [
 		//Ignore any common modules	
@@ -19,15 +19,40 @@ var common = {
 };
 
 
+//LESS to CSS
+var LESS_APP_DIR = path.resolve(__dirname, 'src/client/less');
+var LESS_APP_OUT = path.resolve(__dirname, 'src/client/public/css');
+var lessToCSS = {
+	entry: {
+		index: LESS_APP_DIR + '/index.less',
+		/* Multiple Entry Points */
+	},
+	output:{
+		path: LESS_APP_OUT,
+		filename: "[name].bundle.css",
+	},
+	module: {
+		loaders: [
+			{
+				test: /\.less$/,
+				include: LESS_APP_DIR,
+				loader: 'less-loader',
+			},
+			/* Multiple Loaders */
+		]
+	},
+}
+
 //Front End
 var FE_APP_DIR = path.resolve(__dirname, 'src/client/app');
+var FE_APP_OUT = path.resolve(__dirname, "src/client/public/build");
 var frontend = {
 	entry: {
 		index: FE_APP_DIR + '/index.jsx',
 		/* Multiple Entry Points */
 	},
 	output:{
-		path: path.join(__dirname, "src/client/public/build"),
+		path: FE_APP_OUT,
 		filename: "[name].bundle.js",
 	},
 	module: {
@@ -69,7 +94,8 @@ var backend = {
 //Export
 var config = [
 	Object.assign({}, common, frontend),
-	Object.assign({}, common, backend)
+	Object.assign({}, common, backend),
+	Object.assign({}, common, lessToCSS)
 ];
 
 console.log(config);
