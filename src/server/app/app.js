@@ -28,7 +28,7 @@ app.use(express.static(client));	//Express to Serve Public Content
 
 //Serve Main Page
 app.get('/', function(req, res, next){
-	res.sendFile(path.join(client,'index.html'));
+	res.sendFile(path.join(client,'html','index.html'));
 });
 
 

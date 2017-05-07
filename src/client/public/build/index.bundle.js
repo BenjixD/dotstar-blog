@@ -9537,17 +9537,60 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 class Banner extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+	constructor() {
+		super();
+		this.state = {
+			target: "nav-banner"
+		};
+	}
+
 	render() {
 		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			'div',
-			null,
+			'nav',
+			{ className: 'navbar navbar-default' },
 			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				'p',
-				null,
-				'Hello From the client!'
+				'div',
+				{ className: 'container-fluid' },
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'div',
+					{ className: 'navbar-header' },
+					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+						'button',
+						{ type: 'button', className: 'navbar-toggle collapsed', 'data-toggle': 'collapse', 'data-target': this.state.target, 'aria-expanded': 'false' },
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+							'span',
+							{ className: 'sr-only' },
+							'Toggle navigation'
+						),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'icon-bar' }),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'icon-bar' }),
+						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'icon-bar' })
+					)
+				),
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(BannerContent, { target: this.state.target })
 			)
 		);
 	}
+}
+
+function BannerContent(props) {
+	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+		'div',
+		{ className: 'collapse navbar-collapse', id: props.target },
+		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+			'ul',
+			{ className: 'nav navbar-nav' },
+			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+				'li',
+				null,
+				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+					'a',
+					{ href: '#' },
+					'Link'
+				)
+			)
+		)
+	);
 }
 
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_react_dom__["render"])(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Banner, null), document.getElementById('app'));
