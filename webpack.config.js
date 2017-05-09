@@ -2,6 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 var fs = require('fs');
 var nodeExternals = require('webpack-node-externals');	//To ignore externals
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 //Common
 var common = {
@@ -10,7 +11,7 @@ var common = {
   },
   plugins: [ /* common plugins */ ],
   resolve: {
-      extensions: ['.js', '.jsx', '.less'] // common extensions
+      extensions: ['.js', '.jsx'] // common extensions
   },
   externals: [
 		//Ignore any common modules	
@@ -32,15 +33,16 @@ var lessToCSS = {
 		filename: "[name].bundle.css",
 	},
 	module: {
-		loaders: [
-			{
-				test: /\.less$/,
-				include: LESS_APP_DIR,
-				loader: 'less-loader',
-			},
-			/* Multiple Loaders */
-		]
+		loaders:[{
+			test:/\.less$/,
+			loader: ExtractTextPlugin.extract({ 
+				fallback: 'style-loader', 
+				use: 'css-loader!less-loader' })	//compile less to CSS
+		}]
 	},
+	plugins: [
+		new ExtractTextPlugin("[name].bundle.css")
+	]
 }
 
 //Front End
@@ -95,7 +97,7 @@ var backend = {
 var config = [
 	Object.assign({}, common, frontend),
 	Object.assign({}, common, backend),
-	Object.assign({}, common, lessToCSS)
+	Object.assign({}, lessToCSS)
 ];
 
 console.log(config);
