@@ -9547,7 +9547,7 @@ class Banner extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 	render() {
 		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 			'nav',
-			{ className: 'navbar navbar-default' },
+			{ className: 'navbar navbar-default banner' },
 			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'div',
 				{ className: 'container-fluid' },

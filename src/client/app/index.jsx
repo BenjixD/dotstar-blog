@@ -11,7 +11,7 @@ class Banner extends React.Component{
 
 	render(){
 		return (
-			<nav className="navbar navbar-default">
+			<nav className="navbar navbar-default banner">
 				<div className="container-fluid">
 					<div className="navbar-header">
 						<button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target={this.state.target} aria-expanded="false">
