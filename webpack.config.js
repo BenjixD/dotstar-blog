@@ -16,6 +16,10 @@ var common = {
   externals: [
 		//Ignore any common modules	
 	],
+	node:{
+		__dirname: true,
+		__filename: true
+	}
   // other plugins, postcss config etc. common for frontend and backend
 };
 
