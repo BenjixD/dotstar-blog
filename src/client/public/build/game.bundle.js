@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 182);
+/******/ 	return __webpack_require__(__webpack_require__.s = 181);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -21977,8 +21977,7 @@ module.exports = traverseAllChildren;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 181 */,
-/* 182 */
+/* 181 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21990,64 +21989,158 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-class Banner extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
-	constructor() {
-		super();
-		this.state = {
-			target: "nav-banner"
-		};
-	}
-
-	render() {
-		return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			'nav',
-			{ className: 'navbar navbar-default banner' },
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				'div',
-				{ className: 'container-fluid' },
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-					'div',
-					{ className: 'navbar-header' },
-					__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-						'button',
-						{ type: 'button', className: 'navbar-toggle collapsed', 'data-toggle': 'collapse', 'data-target': this.state.target, 'aria-expanded': 'false' },
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-							'span',
-							{ className: 'sr-only' },
-							'Toggle navigation'
-						),
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'icon-bar' }),
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'icon-bar' }),
-						__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'icon-bar' })
-					)
-				),
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(BannerContent, { target: this.state.target })
-			)
-		);
-	}
+//Stateless functional component
+function Square(props) {
+  //implicit render
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    'button',
+    { className: 'square', onClick: () => props.onClick() },
+    props.value
+  );
 }
 
-function BannerContent(props) {
-	return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-		'div',
-		{ className: 'collapse navbar-collapse', id: props.target },
-		__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-			'ul',
-			{ className: 'nav navbar-nav' },
-			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-				'li',
-				null,
-				__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-					'a',
-					{ href: '#' },
-					'Link'
-				)
-			)
-		)
-	);
+class Board extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+  renderSquare(i) {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Square, { value: this.props.squares[i], onClick: () => this.props.onClick(i) });
+  }
+  render() {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      null,
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'board-row' },
+        this.renderSquare(0),
+        this.renderSquare(1),
+        this.renderSquare(2)
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'board-row' },
+        this.renderSquare(3),
+        this.renderSquare(4),
+        this.renderSquare(5)
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'board-row' },
+        this.renderSquare(6),
+        this.renderSquare(7),
+        this.renderSquare(8)
+      )
+    );
+  }
 }
 
-__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_react_dom__["render"])(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Banner, null), document.getElementById('app'));
+class Game extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+  constructor() {
+    super();
+    this.state = {
+      history: [{
+        squares: Array(9).fill(null)
+      }],
+      xIsNext: true,
+      stepNumber: 0
+    };
+  }
+
+  handleClick(i) {
+    const history = this.state.history;
+    const current = history[this.state.stepNumber];
+    const squares = current.squares.slice();
+
+    if (calculateWinner(squares) || squares[i]) {
+      return;
+    }
+    if (this.state.xIsNext) {
+      squares[i] = 'X';
+    } else {
+      squares[i] = 'O';
+    }
+
+    this.setState({
+      history: history.concat([{
+        squares: squares
+      }]),
+      xIsNext: !this.state.xIsNext,
+      stepNumber: history.length
+    });
+  }
+
+  jumpTo(step) {
+    this.setState({
+      stepNumber: step,
+      xIsNext: step % 2 ? false : true
+    });
+  }
+
+  render() {
+    const history = this.state.history;
+    const current = history[this.state.stepNumber];
+    const winner = calculateWinner(current.squares);
+
+    let status;
+    if (winner) {
+      status = 'Winner: ' + winner;
+    } else {
+      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+    }
+
+    const moves = history.map((step, move) => {
+      const desc = move ? 'Move #' + move : 'Game start';
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'li',
+        { key: move },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'a',
+          { href: '#', onClick: () => this.jumpTo(move) },
+          desc
+        )
+      );
+    });
+
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      { className: 'game' },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'game-board' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Board, {
+          squares: current.squares,
+          onClick: i => this.handleClick(i) })
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'game-info' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          null,
+          status
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'ol',
+          null,
+          moves
+        )
+      )
+    );
+  }
+}
+
+// ========================================
+
+__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Game, null), document.getElementById('root'));
+
+function calculateWinner(squares) {
+  const lines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+    }
+  }
+  return null;
+}
 
 /***/ })
 /******/ ]);

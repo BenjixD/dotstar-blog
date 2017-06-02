@@ -30,6 +30,7 @@ var LESS_APP_OUT = path.resolve(__dirname, 'src/client/public/css');
 var lessToCSS = {
 	entry: {
 		index: LESS_APP_DIR + '/index.less',
+		game: LESS_APP_DIR + '/game.less'
 		/* Multiple Entry Points */
 	},
 	output:{
@@ -55,6 +56,7 @@ var FE_APP_OUT = path.resolve(__dirname, "src/client/public/build");
 var frontend = {
 	entry: {
 		index: FE_APP_DIR + '/index.jsx',
+		game: FE_APP_DIR + '/game.jsx'
 		/* Multiple Entry Points */
 	},
 	output:{

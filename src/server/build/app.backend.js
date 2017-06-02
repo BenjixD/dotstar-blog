@@ -128,6 +128,11 @@ app.use(express.static(client));	//Express to Serve Public Content
 //==============ROUTES=================//
 //=====================================//
 
+//Serve Game Page
+app.get('/game', function(req, res, next){
+	res.sendFile(path.join(client,'html','game.html'));
+});
+
 //Serve Main Page
 app.get('/', function(req, res, next){
 	res.sendFile(path.join(client,'html','index.html'));
