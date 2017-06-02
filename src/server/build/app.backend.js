@@ -133,6 +133,10 @@ app.get('/', function(req, res, next){
 	res.sendFile(path.join(client,'html','index.html'));
 });
 
+app.get('/game', function(req, res, next){
+	res.sendFile(path.join(client,'html','game.html'));
+});
+
 
 //=====================================//
 //==============ERROR==================//
