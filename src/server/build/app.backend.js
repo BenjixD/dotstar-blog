@@ -63,53 +63,73 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports) {
 
-module.exports = require("body-parser");
+module.exports = require("express");
 
 /***/ }),
 /* 1 */
 /***/ (function(module, exports) {
 
-module.exports = require("cookie-parser");
+module.exports = require("path");
 
 /***/ }),
 /* 2 */
 /***/ (function(module, exports) {
 
-module.exports = require("express");
+function webpackEmptyContext(req) {
+	throw new Error("Cannot find module '" + req + "'.");
+}
+webpackEmptyContext.keys = function() { return []; };
+webpackEmptyContext.resolve = webpackEmptyContext;
+module.exports = webpackEmptyContext;
+webpackEmptyContext.id = 2;
 
 /***/ }),
-/* 3 */
+/* 3 */,
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("body-parser");
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("cookie-parser");
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+module.exports = require("cosmicjs");
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = require("morgan");
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-module.exports = require("path");
-
-/***/ }),
-/* 5 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 //IMPORTS//
-var express = __webpack_require__(2);
-var path = __webpack_require__(4);
-var logger = __webpack_require__(3);
-var cookieParser = __webpack_require__(1);
-var bodyParser = __webpack_require__(0);
+var express = __webpack_require__(0);
+var path = __webpack_require__(1);
+var logger = __webpack_require__(7);
+var cookieParser = __webpack_require__(5);
+var bodyParser = __webpack_require__(4);
 
 var app = express();
-var client = path.resolve('..','..','client','public');	//Path to client public folder 
-
+var client = path.resolve('..','..','client','public');	//Path to client public folder
+var firebase = !(function webpackMissingModule() { var e = new Error("Cannot find module \".\""); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+var Cosmic = __webpack_require__(6);
 
 //=====================================//
 //============MIDDLEWARE===============//
@@ -138,6 +158,9 @@ app.get('/', function(req, res, next){
 	res.sendFile(path.join(client,'html','index.html'));
 });
 
+//Blog Pages
+var routes = !(function webpackMissingModule() { var e = new Error("Cannot find module \".\""); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+app.use('/', routes);
 
 //=====================================//
 //==============ERROR==================//
