@@ -34,7 +34,7 @@ module.exports = function(f, cosmic){
 			//Get Content from Cosmic
 			function getCosmicBucket(slug, callback){
 				var params = {
-					slug: 'my-first-blog'
+					slug: slug
 				};
 
 				var config = {};
