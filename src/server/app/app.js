@@ -39,7 +39,7 @@ app.get('/', function(req, res, next){
 
 //Blog Pages
 var routes = require(path.resolve('routes','posts.js'));
-app.use('/', routes);
+app.use('/', routes(firebase, Cosmic));
 
 //=====================================//
 //==============ERROR==================//

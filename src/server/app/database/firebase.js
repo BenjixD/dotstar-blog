@@ -11,7 +11,7 @@ try {
 	console.log("Could not initialize database.");
 }
 
-
+/*
 //Sign-in with server user
 firebase.auth().signInWithEmailAndPassword(CONFIG.user.email, CONFIG.user.password).catch(function(error) {
   // Handle Errors here.
@@ -19,7 +19,7 @@ firebase.auth().signInWithEmailAndPassword(CONFIG.user.email, CONFIG.user.passwo
   var errorMessage = error.message;
   console.log("Could not authenticate " + CONFIG.user.email);
 });
-
+*/
 module.exports = {
 	firebase: firebase
 };
