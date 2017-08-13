@@ -2,22 +2,7 @@ var path = require('path');
 var async = require('async');
 var cosmicConfig = require('../../../config/cosmic-config.json');
 
-
-firebase=require('firebase');
-require('firebase/auth');
-require('firebase/database');
-
-
-var CONFIG = require(path.resolve('..','..','config','database-config.json'));
-try {
-	firebase.initializeApp(CONFIG.config);
-} catch(err) {
-		console.log("Could not initialize database.");
-		console.log(err);
-}
-
-
-module.exports = function(f, cosmic){
+module.exports = function(firebase, cosmic){
 	var express = require('express');
 	var router = express.Router();
 
@@ -47,8 +32,8 @@ module.exports = function(f, cosmic){
 				if(err){
 					console.log("REKT");
 				}
-				console.log(post);
-				res.send(post.content);
+				console.log(post.object.content);
+				res.send("<html><body>" + post.object.content + "</body></html>");
 				res.end();
 		});
 	});

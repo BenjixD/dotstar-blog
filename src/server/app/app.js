@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var app = express();
 var client = path.resolve('..','..','client','public');	//Path to client public folder
-var firebase = require(path.resolve('database','firebase.js'));
+var firebase = require(path.resolve('database','firebase.js')).firebase;
 var Cosmic = require('cosmicjs');
 
 //=====================================//
