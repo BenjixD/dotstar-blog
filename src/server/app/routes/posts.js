@@ -33,7 +33,7 @@ module.exports = function(firebase, cosmic){
 					console.log("REKT");
 				}
 				console.log(post.object.content);
-				res.send("<html><body>" + post.object.content + "</body></html>");
+				res.send(post.object.content);
 				res.end();
 		});
 	});
