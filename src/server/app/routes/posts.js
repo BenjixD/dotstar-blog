@@ -7,6 +7,8 @@ module.exports = function(firebase, cosmic){
 	var router = express.Router();
 
 	router.get('/posts/:slug', function(req, res, next) {
+		console.log(req.params.slug);
+		
 		async.waterfall([
 			function querySlug(callback){
 				var slugValue = null;
@@ -14,7 +16,7 @@ module.exports = function(firebase, cosmic){
 					slugValue = snapshot.val().slug;
 				});
 				callback(null, slugValue);
-			}, function getCosmicBucket(callback, slug){
+			}, function getCosmicBucket(slug, callback){
 				var params = {
 					slug: slug
 				}
@@ -26,9 +28,9 @@ module.exports = function(firebase, cosmic){
 				if(err){
 					console.log("REKT");
 				}
+				console.log(req.params.slug);
+				res.end();
 		});
-		console.log(req.params.slug);
-		res.end();
 	});
 
 	return router;

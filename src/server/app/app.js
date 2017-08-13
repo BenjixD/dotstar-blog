@@ -38,8 +38,8 @@ app.get('/', function(req, res, next){
 });
 
 //Blog Pages
-var routes = require(path.resolve('routes','posts.js'));
-app.use('/', routes(firebase, Cosmic));
+var routes = require(path.resolve('routes','posts.js'))(firebase, Cosmic);
+app.use('/', routes);
 
 //=====================================//
 //==============ERROR==================//
